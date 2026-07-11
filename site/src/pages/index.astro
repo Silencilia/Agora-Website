@@ -1,71 +1,36 @@
 ---
-import { getCollection, getEntry } from "astro:content";
-import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import FeaturedShowcase from "../components/FeaturedShowcase.astro";
+import Logo from "../components/Logo.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
-
-const hero = await getEntry("projects", "jinqiao-art-center");
-
-const featured = (await getCollection("projects", ({ data }) => data.featured && !data.draft))
-  .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base>
-  {
-    hero && (
-      <section class="relative">
-        <a href={`/projects/${hero.id}/`} class="group block">
-          <div class="max-h-[82vh] overflow-hidden bg-mist">
-            <Image
-              src={hero.data.cover}
-              alt={hero.data.title}
-              widths={[800, 1400, 2000]}
-              sizes="100vw"
-              loading="eager"
-              class="h-full max-h-[82vh] w-full object-cover"
-            />
-          </div>
-          <p class="eyebrow mx-auto max-w-screen-2xl px-6 py-4 transition-colors group-hover:text-brand md:px-10">
-            {hero.data.title}
-            {hero.data.location && ` — ${hero.data.location}`}
-          </p>
-        </a>
-      </section>
-    )
-  }
+<Base fullBleed>
+  <FeaturedShowcase />
 
-  <section class="mx-auto max-w-screen-2xl px-6 py-20 md:px-10 md:py-28">
-    <p
-      class="max-w-4xl text-2xl leading-snug font-light tracking-tight text-balance md:text-4xl"
+  {/* Reserves the height of the fixed showcase so it shows through first */}
+  <div class="h-[100svh]" aria-hidden="true"></div>
+
+  {/* Content scrolls up over the fixed showcase */}
+  <div class="relative z-10 bg-paper">
+    <section
+      class="mx-auto flex max-w-3xl flex-col items-center px-6 py-24 text-center md:py-36"
     >
-      AGORA is the architecture practice of Minquan Wang — buildings, urban
-      design, and research engaging the public realm with disciplinary rigor<span
-        class="text-brand">.</span
+      <Logo class="mb-10 h-14 w-auto md:h-32" />
+      <p
+        class="text-2xl leading-snug font-light tracking-tight text-balance md:text-4xl"
       >
-    </p>
-    <a
-      href="/about/"
-      class="group mt-8 inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
-    >
-      About the practice
-      <ArrowIcon class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1" />
-    </a>
-  </section>
-
-  <section class="mx-auto max-w-screen-2xl px-6 pb-24 md:px-10 md:pb-32">
-    <div class="mb-10 flex items-baseline justify-between border-t border-line pt-6">
-      <h2 class="eyebrow">Selected works</h2>
+        AGORA is a full-service architecture and interior design studio based in New York. Founded by Minquan Wang in 2024, it builds the public realm at the intersection of technology and culture.
+      </p>
       <a
-        href="/projects/"
-        class="group inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
+        href="/about/"
+        class="group mt-10 inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
       >
-        All projects
-        <ArrowIcon class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1" />
+        About the practice
+        <ArrowIcon
+          class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1"
+        />
       </a>
-    </div>
-    <div class="grid gap-x-10 gap-y-16 md:grid-cols-2">
-      {featured.map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
+    </section>
+  </div>
 </Base>

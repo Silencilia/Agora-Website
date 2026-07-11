@@ -7,11 +7,14 @@ interface Props {
   /** Page title; the main page passes none and is titled just "Agora". */
   title?: string;
   description?: string;
+  /** Home page: let the fixed showcase sit under the overlay header. */
+  fullBleed?: boolean;
 }
 
 const {
   title,
   description = "AGORA is the architecture practice of Minquan Wang, AIA — buildings, urban design, and research engaging the public realm.",
+  fullBleed = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — AGORA` : "Agora";
@@ -32,7 +35,10 @@ const pageTitle = title ? `${title} — AGORA` : "Agora";
   </head>
   <body class="flex min-h-dvh flex-col">
     <Header />
-    <main class="flex-1">
+    <main
+      class="flex-1"
+      style={fullBleed ? undefined : "padding-top: var(--header-h, 8.5vw)"}
+    >
       <slot />
     </main>
     <Footer />
