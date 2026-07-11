@@ -1,0 +1,23 @@
+# Normalize line endings: text files use LF in the repo, native on checkout.
+* text=auto
+
+# Explicitly treat web/source files as text
+*.astro    text
+*.ts       text
+*.tsx      text
+*.js       text
+*.mjs      text
+*.css      text
+*.md       text
+*.json     text
+*.svg      text
+*.py       text
+
+# Binary assets — never diff or normalize
+*.jpg      binary
+*.jpeg     binary
+*.png      binary
+*.webp     binary
+*.pdf      binary
+*.ai       binary
+*.psd      binary

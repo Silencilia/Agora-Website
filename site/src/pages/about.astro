@@ -1,0 +1,185 @@
+---
+import Base from "../layouts/Base.astro";
+
+const experience = [
+  {
+    firm: "Kohn Pedersen Fox, New York",
+    role: "Architect",
+    period: "2026 —",
+  },
+  {
+    firm: "Rockwell Group, New York",
+    role: "Architect",
+    period: "2025 — 2026",
+  },
+  {
+    firm: "David Chipperfield Architects, Shanghai",
+    role: "Architect",
+    period: "2022 — 2025",
+  },
+  {
+    firm: "Kohn Pedersen Fox, New York",
+    role: "Architectural Designer",
+    period: "2019 — 2021",
+  },
+];
+
+const education = [
+  {
+    school: "Yale University School of Architecture",
+    degree: "Post-Professional M.Arch — H.I. Feldman Prize, 2017",
+    period: "2016 — 2018",
+  },
+  {
+    school: "Tsinghua University School of Architecture",
+    degree: "M.Arch",
+    period: "2014 — 2016",
+  },
+  {
+    school: "Tsinghua University School of Architecture",
+    degree: "B.Arch",
+    period: "2010 — 2014",
+  },
+];
+
+const awards = [
+  "Gold Winner, A' Design Award — West Zhejiang Agro-Tech Industry Park, 2025",
+  "Gold Winner, APR Urban Design & Architecture Design Awards, 2025",
+  "Gold Winner, NY Architectural Design Awards, 2024",
+  "Bronze Prize, International Design Awards — Mixed Use, 2024",
+  "Bronze Prize, International Design Awards — Cultural, 2024",
+  "Silver Winner, MUSE Design Awards, 2024",
+  "Gold & Silver Winner, London Design Awards, 2024",
+  "Honorable Mention, Non Architecture Competitions, 2019",
+  "H.I. Feldman Prize, Yale School of Architecture, 2017",
+];
+
+const publications = [
+  "Folding Jingdezhen, Tongji University Press, 2026",
+  "“Easy Office”, Within or Without, Actar D., 2020",
+  "“Détournement of Allure”, Yale Constructs, Fall 2017",
+  "“Maritime Thinkbelt”, Retrospecta 40, Actar D., 2017",
+];
+
+const teaching = [
+  "Option Studio IV, Critic — Tongji University CAUP, 2023 — 2024",
+  "“Atlas of the Unseen Shanghai” joint workshop, Guest Critic — HKU / MIT City Science / City Science Lab Tongji, 2024",
+];
+---
+
+<Base title="About">
+  <section class="mx-auto max-w-screen-2xl px-6 py-14 md:px-10 md:py-20">
+    <h1 class="text-3xl font-light tracking-tight md:text-5xl">
+      About<span class="text-brand">.</span>
+    </h1>
+
+    <p
+      class="mt-14 max-w-4xl text-2xl leading-snug font-light tracking-tight text-balance md:mt-20 md:text-4xl"
+    >
+      An architecture that bravely intervenes larger social narratives with a
+      refound disciplinary core — an engaging autonomy<span class="text-brand"
+        >.</span
+      >
+    </p>
+
+    <div class="mt-16 grid gap-12 md:mt-24 md:grid-cols-[280px_1fr]">
+      <div>
+        <!-- TODO: replace with a portrait photograph of Minquan Wang -->
+        <div class="aspect-[3/4] bg-mist"></div>
+        <p class="eyebrow mt-3">Minquan Wang, AIA, LEED GA</p>
+      </div>
+
+      <div class="prose-agora space-y-5 !max-w-2xl text-[0.975rem] leading-relaxed">
+        <p>
+          AGORA is the practice of Minquan Wang, AIA, LEED GA, a registered
+          architect based in New York. His work spans buildings, urban design,
+          installations, and computational research, with a sustained focus on
+          system design and space-making in the public realm — how architecture
+          negotiates between agencies to reshape social relationships in the
+          contemporary city.
+        </p>
+        <p>
+          Minquan is currently an architect at Kohn Pedersen Fox in New York.
+          He previously practiced at Rockwell Group in New York and at David
+          Chipperfield Architects in Shanghai, where he led the design of
+          internationally noted competitions including the Jinqiao Art Center
+          and the Minsheng Wharf masterplan, served as project architect for
+          RAM Assembles 2023 at the Rockbund Art Museum, and was design lead
+          for the built NIO House at Beijing Huaxi Live.
+        </p>
+        <p>
+          His independent work has been recognized internationally: the winning
+          proposal for the West Zhejiang Agro-Tech Industry Park received the
+          A' Design Award Gold Prize (2025) among numerous other honors, and
+          his proposal for the China Academy of Art Mengyuan Campus was
+          similarly premiated. His projects have been exhibited in New York,
+          Venice, London, and Como.
+        </p>
+        <p>
+          Minquan taught the Option Studio at Tongji University in Shanghai and
+          is co-author of <em>Folding Jingdezhen</em>. He received his M.Arch
+          from the Yale School of Architecture, where he was awarded the H.I.
+          Feldman Prize, and his B.Arch and M.Arch from Tsinghua University.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-20 grid gap-12 border-t border-line pt-12 md:mt-28 md:grid-cols-3">
+      <div>
+        <h2 class="eyebrow">Experience</h2>
+        <ul class="mt-5 space-y-4 text-sm">
+          {
+            experience.map((item) => (
+              <li>
+                <p class="text-ink/85">{item.firm}</p>
+                <p class="text-ink/50">
+                  {item.role}, {item.period}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class="eyebrow mt-10">Teaching</h2>
+        <ul class="mt-5 space-y-3 text-sm text-ink/70">
+          {teaching.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="eyebrow">Education</h2>
+        <ul class="mt-5 space-y-4 text-sm">
+          {
+            education.map((item) => (
+              <li>
+                <p class="text-ink/85">{item.school}</p>
+                <p class="text-ink/50">
+                  {item.degree}, {item.period}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class="eyebrow mt-10">Certification</h2>
+        <ul class="mt-5 space-y-2 text-sm text-ink/70">
+          <li>Registered Architect, Connecticut</li>
+          <li>AIA Member, New York Chapter</li>
+          <li>LEED Green Associate</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="eyebrow">Selected awards</h2>
+        <ul class="mt-5 space-y-2 text-sm text-ink/70">
+          {awards.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2 class="eyebrow mt-10">Publications</h2>
+        <ul class="mt-5 space-y-2 text-sm text-ink/70">
+          {publications.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

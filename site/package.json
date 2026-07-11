@@ -1,0 +1,18 @@
+{
+  "name": "agora-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "import:projects": "python scripts/import_projects.py"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.14.0",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.1.0"
+  }
+}

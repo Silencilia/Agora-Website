@@ -1,0 +1,19 @@
+---
+/**
+ * The letterspaced AGORA wordmark. The trailing negative margin
+ * compensates for the letter-spacing after the final "A" so the
+ * wordmark aligns optically in flex layouts.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span
+  class:list={[
+    "inline-block tracking-(--tracking-brand) -mr-[0.45em] font-normal select-none",
+    className,
+  ]}>AGORA</span
+>

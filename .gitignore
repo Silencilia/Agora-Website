@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------------------
+# AGORA website repository
+#
+# The repo tracks the website (site/) plus its small branding source and the
+# web-optimized project images. The multi-gigabyte RAW asset archive is kept
+# local only — several files exceed GitHub's 100 MB limit, and the web-ready
+# derivatives are generated into site/src/content/projects/ by
+# site/scripts/import_projects.py.
+# ---------------------------------------------------------------------------
+
+# Raw asset archive (local working files, not for git)
+/Projects/
+/Background/
+/Index images/
+
+# Node / Astro build artifacts
+node_modules/
+dist/
+.astro/
+.output/
+.vercel/
+.netlify/
+
+# Large binary formats (safety net if any land inside tracked folders)
+*.psd
+*.ai.bak
+
+# Claude Code local (machine-specific) settings
+.claude/settings.local.json
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,38 @@
+---
+/**
+ * The AGORA mark — a faceted prism, extracted from AGORA_LOGO_light.ai.
+ * `fill` is the body color; `gap` is the color of the facet joints and
+ * should match the background the mark sits on.
+ */
+interface Props {
+  class?: string;
+  fill?: string;
+  gap?: string;
+}
+
+const { class: className, fill = "var(--color-brand)", gap = "var(--color-paper)" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 556.2 737.8"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <path
+    d="M342.3 6 6 342.3v181.7l207.8 207.8 336.4-336.3V213.8Z"
+    fill={fill}></path>
+  <g
+    fill="none"
+    stroke={gap}
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M342.3 6 6 342.3v181.7l207.8 207.8 336.4-336.3V213.8Z"></path>
+    <path d="M550.2 213.8 213.8 550.2 6 342.3"></path>
+    <path d="M213.8 731.8V550.2"></path>
+    <path d="M342.3 6v181.7L6 524"></path>
+    <path d="m342.3 187.7 207.9 207.8"></path>
+  </g>
+</svg>

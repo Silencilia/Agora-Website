@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Projects">
+  <section class="mx-auto max-w-screen-2xl px-6 py-14 md:px-10 md:py-20">
+    <header class="mb-12 flex items-baseline justify-between md:mb-16">
+      <h1 class="text-3xl font-light tracking-tight md:text-5xl">
+        Projects<span class="text-brand">.</span>
+      </h1>
+      <p class="eyebrow">{projects.length} works</p>
+    </header>
+
+    <div class="grid gap-x-10 gap-y-16 md:grid-cols-2">
+      {
+        projects.map((project, i) => (
+          <ProjectCard project={project} eager={i < 2} />
+        ))
+      }
+    </div>
+  </section>
+</Base>

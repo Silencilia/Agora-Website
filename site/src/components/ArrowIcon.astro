@@ -1,0 +1,23 @@
+---
+/**
+ * Brand arrow, redrawn from Icon/Arrow.ai (chevron + shaft, points left).
+ * Use `class="rotate-180"` for a forward arrow.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 200 200"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="12"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <path d="M100 191.5 8.5 100.1 100 8.8M9.3 100h181.6"></path>
+</svg>
