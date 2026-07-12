@@ -13,6 +13,12 @@ awards:
   - Gold Winner, NY Architectural Design Awards, 2024
   - Bronze Prize, International Design Awards, 2024
 cover: ./main.jpg
+interludes:
+  - after: 2
+    body: >-
+      The campus negotiates between agricultural landscape and technological
+      infrastructure, organizing research, production, and public exchange into
+      a continuous ground where farming and fabrication meet.
 featured: true
 order: 40
 ---

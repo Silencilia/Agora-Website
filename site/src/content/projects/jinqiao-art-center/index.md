@@ -9,6 +9,19 @@ role: Project architect, David Chipperfield Architects Shanghai
 cover: ./main.jpg
 featured: true
 order: 10
+interludes:
+  - after: 2
+    body: >-
+      The massing takes an urban approach, treating the Art Center as a node
+      that interconnects the surrounding park landscapes and key destinations. A
+      sequence of occupiable surfaces lifts the visitor flow from the park onto
+      planted platforms above the building, where outdoor cultural and community
+      activities unfold.
+  - after: 5
+    body: >-
+      Beneath the platforms, an all-encompassing roof — gently fluctuating and
+      permeated with skylights — shelters galleries, performance spaces, and
+      community programs gathered around a full-height atrium.
 ---
 
 Jinqiao Central Park is an anchor development in the rise of Jinqiao as a new epicenter of Shanghai. Six international architectural offices were invited to compete for its three key buildings, among them the Jinqiao Art Center. Responding to the civic character of the park and an open-ended program brief, the proposal parts ways with the collection-centered museum model, replacing it with a social condenser — a gathering place for the city that fuses cultural and community programs in a stack of spaces under an all-encompassing roof permeated with light, air, and nature.

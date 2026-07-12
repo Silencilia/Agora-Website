@@ -8,6 +8,12 @@ role: Designer
 awards:
   - Honorable Mention, Non Architecture Competitions — "Dying", 2019
 cover: ./main.jpg
+interludes:
+  - after: 1
+    body: >-
+      An entry to the Non Architecture competition "Dying," the proposal asks how
+      commemoration might belong to ordinary lives rather than singular heroes —
+      a monument assembled from everyone.
 order: 110
 ---
 

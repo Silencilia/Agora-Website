@@ -5,9 +5,21 @@ category: academic
 year: "2017"
 location: Miami Beach, FL, US
 status: Yale School of Architecture studio
-role: Designer
+role: Designer — instructors Emre Arolat, Gonca Paşolar, Kyle Dugdale
+collaborators: Istvan van Vianen
 cover: ./main.jpg
 order: 80
+interludes:
+  - after: 1
+    body: >-
+      The design is conceived less as a building than as a game whose rules keep
+      publicness at the core of the development's allure — where public space
+      becomes the very asset that private interests cannot afford to fence off.
+  - after: 6
+    body: >-
+      A preserved fabric of small blocks channels movement through the site, so
+      that the beachfront's social life is threaded into the new development
+      rather than walled off from it.
 ---
 
 Miami Beach is among the ultimate tourist destinations in the US, remembered and fantasized for its seashores, bars, and tropical flair — all tokens of a vibrant social life that consumerist development has been gnawing away. Profit drives developers to erect privatized luxury hotels and condos, chopping the beachfront into fenced bubbles increasingly disengaged from the city.

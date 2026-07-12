@@ -5,6 +5,12 @@ category: research
 status: Research and fabrication
 role: Designer and fabricator
 cover: ./main.jpg
+interludes:
+  - after: 4
+    body: >-
+      The project pairs computational form-finding with hands-on craft,
+      translating digital surfaces into hand-finished components — and, in a
+      parallel series, into charged figural images.
 order: 140
 ---
 

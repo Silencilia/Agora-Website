@@ -31,6 +31,20 @@ const projects = defineCollection({
       /** Sort key for the gallery; lower comes first */
       order: z.number().default(999),
       draft: z.boolean().default(false),
+      /**
+       * Supplemental text inserted between gallery images. `after` is the
+       * 1-indexed gallery image the text should follow; `body` may contain
+       * multiple paragraphs separated by blank lines.
+       */
+      interludes: z
+        .array(
+          z.object({
+            after: z.number(),
+            heading: z.string().optional(),
+            body: z.string(),
+          }),
+        )
+        .default([]),
     }),
 });
 

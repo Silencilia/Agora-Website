@@ -3,6 +3,17 @@ import Base from "../layouts/Base.astro";
 import FeaturedShowcase from "../components/FeaturedShowcase.astro";
 import Logo from "../components/Logo.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
+
+const awards = [
+  "Gold Winner, A' Design Award, 2025",
+  "Gold Winner, APR Urban Design & Architecture Design Awards, 2025",
+  "Gold Winner, NY Architectural Design Awards, 2024",
+  "Bronze Prize, International Design Awards — Mixed Use, 2024",
+  "Bronze Prize, International Design Awards — Cultural, 2024",
+  "Silver Winner, MUSE Design Awards, 2024",
+  "Gold & Silver Winner, London Design Awards, 2024",
+  "Honorable Mention, Non Architecture Competitions, 2019",
+];
 ---
 
 <Base fullBleed>
@@ -22,11 +33,19 @@ import ArrowIcon from "../components/ArrowIcon.astro";
       >
         AGORA is a full-service architecture and interior design studio based in New York. Founded by Minquan Wang in 2024, it builds the public realm at the intersection of technology and culture.
       </p>
+
+      <div class="mt-16 w-full border-t border-line pt-10">
+        <h2 class="eyebrow">Selected awards</h2>
+        <ul class="mx-auto mt-6 max-w-xl space-y-2 text-sm text-ink/70">
+          {awards.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
       <a
-        href="/about/"
-        class="group mt-10 inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
+        href="/projects/"
+        class="group mt-16 inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
       >
-        About the practice
+        See projects
         <ArrowIcon
           class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1"
         />

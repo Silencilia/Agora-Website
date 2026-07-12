@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import portrait from "../assets/minquan-wang-portrait.jpg";
 
 const experience = [
   {
@@ -65,6 +67,14 @@ const teaching = [
   "Option Studio IV, Critic — Tongji University CAUP, 2023 — 2024",
   "“Atlas of the Unseen Shanghai” joint workshop, Guest Critic — HKU / MIT City Science / City Science Lab Tongji, 2024",
 ];
+
+const exhibitions = [
+  "40×40 International Exhibition — Blanc Gallery, New York, 2025",
+  "ITSLIQUID Venice International Art Fair — Palazzo Albrizzi-Capello, Venice, 2025",
+  "ITSLIQUID Borders Art Fair — Palazzo Albrizzi-Capello, Venice, 2025",
+  "ITSLIQUID Canvas Art Fair — ELEMENTS, London, 2025",
+  "A’ Design Award Exhibition — Sala Bianco del Teatro, Como, 2025",
+];
 ---
 
 <Base title="About">
@@ -72,8 +82,15 @@ const teaching = [
 
     <div class="mt-16 grid gap-12 md:mt-24 md:grid-cols-[280px_1fr]">
       <div>
-        <!-- TODO: replace with a portrait photograph of Minquan Wang -->
-        <div class="aspect-[3/4] bg-mist"></div>
+        <div class="aspect-[3/4] overflow-hidden bg-mist">
+          <Image
+            src={portrait}
+            alt="Portrait of Minquan Wang"
+            widths={[280, 560, 840]}
+            sizes="(min-width: 768px) 280px, 100vw"
+            class="h-full w-full object-cover"
+          />
+        </div>
         <p class="eyebrow mt-3">Minquan Wang, AIA, LEED GA</p>
       </div>
 
@@ -150,6 +167,11 @@ const teaching = [
           <li>Registered Architect, Connecticut</li>
           <li>AIA Member, New York Chapter</li>
           <li>LEED Green Associate</li>
+        </ul>
+
+        <h2 class="eyebrow mt-10">Exhibitions</h2>
+        <ul class="mt-5 space-y-2 text-sm text-ink/70">
+          {exhibitions.map((item) => <li>{item}</li>)}
         </ul>
       </div>
 

@@ -12,6 +12,12 @@ awards:
   - Silver Winner, MUSE Design Awards — Educational, 2024
   - Silver Winner, MUSE Design Awards — Institutional, 2024
 cover: ./main.jpg
+interludes:
+  - after: 2
+    body: >-
+      Studios, galleries, and pavilions are woven into a landscape of courtyards
+      and gardens, framing art education as a continuum between making,
+      exhibition, and everyday campus life.
 featured: true
 order: 50
 ---
