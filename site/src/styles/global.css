@@ -1,56 +1,11 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Neuzeit Grotesk — primary typeface of AGORA.                        */
-/* Licensed webfont files are not committed yet: drop the .woff2      */
-/* files into /public/fonts using the names below (see README).       */
-/* `local()` sources let the site pick up a locally installed copy    */
-/* (e.g. activated through Adobe Fonts) in the meantime.              */
+/* Hanken Grotesk — primary typeface of AGORA.                        */
+/* Open source (SIL OFL). Loaded from Google Fonts via the <link> in  */
+/* src/layouts/Base.astro, so no @font-face rules are needed here.    */
+/* To self-host instead, see the Fonts section of the README.         */
 /* ------------------------------------------------------------------ */
-
-@font-face {
-  font-family: "Neuzeit Grotesk";
-  src:
-    local("Neuzeit Grotesk"),
-    local("NeuzeitGro-Reg"),
-    url("/fonts/NeuzeitGrotesk-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Neuzeit Grotesk";
-  src:
-    local("Neuzeit Grotesk Light"),
-    local("NeuzeitGro-Lig"),
-    url("/fonts/NeuzeitGrotesk-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Neuzeit Grotesk";
-  src:
-    local("Neuzeit Grotesk Bold"),
-    local("NeuzeitGro-Bol"),
-    url("/fonts/NeuzeitGrotesk-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Neuzeit Grotesk";
-  src:
-    local("Neuzeit Grotesk Black"),
-    local("NeuzeitGro-Bla"),
-    url("/fonts/NeuzeitGrotesk-Black.woff2") format("woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ------------------------------------------------------------------ */
 /* Design tokens — derived from the AGORA mark (vermilion on white).  */
@@ -64,15 +19,14 @@
   --color-line: #e6e6e4; /* hairline rules */
 
   --font-sans:
-    "Neuzeit Grotesk", "neuzeit-grotesk", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+    "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --tracking-brand: 0.45em; /* AGORA wordmark letterspacing */
   --tracking-eyebrow: 0.28em; /* nav / labels / captions */
 }
 
 /* ------------------------------------------------------------------ */
-/* Base                                                                */
+/* Base                                                               */
 /* ------------------------------------------------------------------ */
 
 html {
@@ -97,31 +51,41 @@ body {
   outline-offset: 3px;
 }
 
-/* Small uppercase label, used across pages */
-.eyebrow {
-  font-size: 0.675rem;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-eyebrow);
-  color: color-mix(in srgb, var(--color-ink) 55%, var(--color-paper));
-}
+/* ------------------------------------------------------------------ */
+/* Component classes                                                  */
+/* Kept inside @layer components so Tailwind utilities written on the  */
+/* same element (text-lg, hover:text-brand, max-w-2xl, ...) still win. */
+/* Unlayered CSS beats every Tailwind layer, which silently swallowed  */
+/* those utilities before.                                             */
+/* ------------------------------------------------------------------ */
 
-/* Markdown body of project pages */
-.prose-agora {
-  max-width: 62ch;
-  font-size: 0.975rem;
-  line-height: 1.75;
-  color: color-mix(in srgb, var(--color-ink) 88%, var(--color-paper));
-}
+@layer components {
+  /* Small label, used across pages — body text, bolded               */
+  .eyebrow {
+    font-size: 0.975rem;
+    line-height: 1.75;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--color-ink) 88%, var(--color-paper));
+  }
 
-.prose-agora p + p {
-  margin-top: 1.1em;
-}
+  /* Markdown body of project pages                                   */
+  .prose-agora {
+    max-width: 62ch;
+    font-size: 0.975rem;
+    line-height: 1.75;
+    color: color-mix(in srgb, var(--color-ink) 88%, var(--color-paper));
+  }
 
-.prose-agora a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+  .prose-agora p + p {
+    margin-top: 1.1em;
+  }
 
-.prose-agora a:hover {
-  color: var(--color-brand);
+  .prose-agora a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose-agora a:hover {
+    color: var(--color-brand);
+  }
 }

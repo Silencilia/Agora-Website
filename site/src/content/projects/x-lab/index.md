@@ -5,11 +5,6 @@ category: academic
 status: Concept
 role: Designer
 cover: ./main.jpg
-interludes:
-  - after: 4
-    body: >-
-      X-Lab is conceived as an open framework for experimentation, where a
-      flexible section and structure accommodate research programs in flux.
 order: 160
 ---
 

@@ -1,19 +1,11 @@
 ---
 import { Image } from "astro:assets";
 
-interface Interlude {
-  /** Insert this text after the Nth gallery image (1-indexed). */
-  after: number;
-  heading?: string;
-  body: string;
-}
-
 interface Props {
   slug: string;
-  interludes?: Interlude[];
 }
 
-const { slug, interludes = [] } = Astro.props;
+const { slug } = Astro.props;
 
 // Eagerly load every project's gallery images, then keep this project's.
 const modules = import.meta.glob<{ default: ImageMetadata }>(
@@ -29,8 +21,6 @@ const images = Object.entries(modules)
 const ratio = (im: ImageMetadata) => im.width / im.height;
 
 type Row = { kind: "full" | "landscape" | "portrait"; imgs: ImageMetadata[] };
-type TextItem = { text: true; heading?: string; paragraphs: string[] };
-type Item = Row | TextItem;
 
 // Build rows: wide panoramas full-width, portraits paired, others single.
 const rows: Row[] = [];
@@ -55,43 +45,13 @@ while (i < images.length) {
     i += 1;
   }
 }
-
-// Interleave interludes after the row that reaches their `after` count.
-const pending = [...interludes].sort((a, b) => a.after - b.after);
-const toText = (it: Interlude): TextItem => ({
-  text: true,
-  heading: it.heading,
-  paragraphs: it.body.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean),
-});
-
-const items: Item[] = [];
-let consumed = 0;
-for (const row of rows) {
-  items.push(row);
-  consumed += row.imgs.length;
-  while (pending.length && pending[0].after <= consumed) {
-    items.push(toText(pending.shift()!));
-  }
-}
-for (const rest of pending) items.push(toText(rest));
-
-const isText = (it: Item): it is TextItem => "text" in it;
 ---
 
 {
   images.length > 0 && (
     <div class="mx-auto max-w-screen-2xl space-y-6 px-6 md:space-y-10 md:px-10">
-      {items.map((item) =>
-        isText(item) ? (
-          <div class="mx-auto max-w-2xl py-6 md:py-10">
-            {item.heading && <h2 class="eyebrow mb-4">{item.heading}</h2>}
-            <div class="prose-agora space-y-4">
-              {item.paragraphs.map((p) => (
-                <p>{p}</p>
-              ))}
-            </div>
-          </div>
-        ) : item.kind === "portrait" && item.imgs.length === 2 ? (
+      {rows.map((item) =>
+        item.kind === "portrait" && item.imgs.length === 2 ? (
           // Paired portraits share one aspect-ratio box so both fill their
           // cell (object-cover) instead of leaving blank space below the
           // shorter image. Use the pair's mean ratio to minimise cropping.

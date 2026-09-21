@@ -29,10 +29,24 @@ const awards = [
     >
       <Logo class="mb-10 h-14 w-auto md:h-32" />
       <p
-        class="text-2xl leading-snug font-light tracking-tight text-balance md:text-4xl"
+        class="text-xl leading-snug font-light text-balance md:text-lg"
       >
-        Agora is a full-service architecture and interior design studio based in New York. Founded by Minquan Wang in 2024, it builds the public realm at the intersection of technology and culture.
+        Welcome to Agora.
       </p>
+       <p
+        class="text-xl leading-snug font-light text-balance md:text-lg"
+      >
+        We are an architecture studio. We create spaces that bring people together.
+      </p>
+<a
+        href="/projects/"
+        class="eyebrow group mt-16 inline-flex items-center gap-3 transition-colors hover:text-brand"
+      >
+        See our works
+        <ArrowIcon
+          class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1"
+        />
+      </a>
 
       <div class="mt-16 w-full border-t border-line pt-10">
         <h2 class="eyebrow">Selected awards</h2>
@@ -40,16 +54,6 @@ const awards = [
           {awards.map((item) => <li>{item}</li>)}
         </ul>
       </div>
-
-      <a
-        href="/projects/"
-        class="group mt-16 inline-flex items-center gap-3 text-[0.7rem] uppercase tracking-(--tracking-eyebrow) text-ink/70 transition-colors hover:text-brand"
-      >
-        See projects
-        <ArrowIcon
-          class="h-3 w-3 rotate-180 transition-transform group-hover:translate-x-1"
-        />
-      </a>
     </section>
   </div>
 </Base>

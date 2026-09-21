@@ -20,7 +20,7 @@ Run from this `site/` folder:
 ```
 site/
 ├── public/
-│   ├── fonts/                  ← Neuzeit Grotesk .woff2 files go here (see Fonts)
+│   ├── fonts/                  ← empty; fonts load from Google Fonts (see Fonts)
 │   ├── favicon.svg             ← AGORA mark
 │   └── Minquan_Wang_CV.pdf     ← linked from the Contact page
 ├── scripts/
@@ -64,23 +64,26 @@ personal | research), `year?`, `location?`, `status?`, `role?`,
 `collaborators?`, `awards?`, `cover`, `featured?` (main-page grid),
 `order` (gallery sort), `draft?` (hide).
 
-## Fonts — Neuzeit Grotesk
+## Fonts — Hanken Grotesk
 
-Neuzeit Grotesk is the site's primary typeface but is a **commercial font**
-(URW/Monotype; also on Adobe Fonts as `neuzeit-grotesk`). Licensed files are
-not committed. To activate it, add the webfont files to `public/fonts/`:
+Hanken Grotesk is the site's primary typeface. It is **open source** (SIL Open
+Font License), so nothing needs to be licensed or committed. It is loaded from
+Google Fonts by the `<link>` in `src/layouts/Base.astro`:
 
 ```
-NeuzeitGrotesk-Light.woff2      (300)
-NeuzeitGrotesk-Regular.woff2    (400)
-NeuzeitGrotesk-Bold.woff2       (700)
-NeuzeitGrotesk-Black.woff2      (900)
+https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300..900&display=swap
 ```
 
-Until then the site falls back to a locally installed copy of the font if one
-exists (e.g. activated via Adobe Fonts / Creative Cloud), then to Helvetica /
-Arial. Alternatively an Adobe Fonts web-project kit can be wired into
-`src/layouts/Base.astro`.
+That request pulls the variable font covering weights 300-900, which is the
+range the site uses (300 light, 400 regular, 700 bold, 900 black). No italics
+are used, so none are requested.
+
+### Self-hosting instead
+
+To drop the third-party request, download the family from
+<https://fonts.google.com/specimen/Hanken+Grotesk>, put the `.woff2` files in
+`public/fonts/`, remove the Google Fonts `<link>` from `Base.astro`, and add
+`@font-face` rules to `global.css` pointing at them.
 
 ## Brand tokens
 
@@ -94,6 +97,4 @@ Derived from `Header and logo/AGORA_LOGO_light.ai`:
 ## Before deploying
 
 - Set the production domain in `astro.config.mjs` (`site`).
-- Provide licensed Neuzeit Grotesk webfonts (above).
-- Replace the portrait placeholder on the About page.
 - Fill the `TODO` narratives in several `src/content/projects/*/index.md`.

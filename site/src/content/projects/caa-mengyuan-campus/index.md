@@ -12,14 +12,8 @@ awards:
   - Silver Winner, MUSE Design Awards — Educational, 2024
   - Silver Winner, MUSE Design Awards — Institutional, 2024
 cover: ./main.jpg
-interludes:
-  - after: 2
-    body: >-
-      Studios, galleries, and pavilions are woven into a landscape of courtyards
-      and gardens, framing art education as a continuum between making,
-      exhibition, and everyday campus life.
 featured: true
-order: 50
+order: 20
 ---
 
 The proposal for the China Academy of Art's Mengyuan Campus weaves studios, galleries, and pavilions into a landscape of courtyards and gardens, framing art education as a continuum between making, exhibition, and everyday campus life. The project received the Bronze Prize of the International Design Awards and twin Silver Winner honors at the MUSE Design Awards, and was exhibited at the ITSLIQUID Venice International Art Fair.

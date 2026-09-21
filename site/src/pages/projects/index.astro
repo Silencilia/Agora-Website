@@ -13,15 +13,69 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
       <p class="eyebrow">{projects.length} works</p>
     </header>
 
-    {/* Masonry: images keep their native aspect ratio and pack together */}
-    <div class="columns-1 gap-x-6 sm:columns-2 sm:gap-x-8 lg:columns-3 lg:gap-x-10">
+    {/*
+      Masonry packed in ROW order: the cards below are dealt left-to-right
+      across the columns (1,2,3 / 4,5,6 ...) by the script underneath, so
+      reading order runs across rather than down. CSS multi-column cannot do
+      this — it always fills a column before starting the next — and
+      `grid-template-rows: masonry` is not shipped anywhere yet.
+
+      Without JavaScript this stays a plain aligned grid in the correct order:
+      images keep their native ratio, cards just don't pack tightly.
+    */}
+    <div
+      data-project-grid
+      class="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10"
+    >
       {
         projects.map((project, i) => (
-          <div class="mb-6 break-inside-avoid sm:mb-8 lg:mb-10">
+          <div>
             <ProjectCard project={project} native eager={i < 3} />
           </div>
         ))
       }
     </div>
+
+    <script is:inline>
+      (() => {
+        const grid = document.querySelector("[data-project-grid]");
+        if (!grid) return;
+
+        // Snapshot the cards once; relayouts move these same nodes, so
+        // already-decoded images are never re-fetched.
+        const cards = Array.from(grid.children);
+        let columns = 0;
+
+        // Read the column count from the CSS grid itself rather than
+        // hard-coding breakpoints, so Tailwind stays the source of truth.
+        const columnCount = () => {
+          const tracks = getComputedStyle(grid).gridTemplateColumns;
+          return tracks && tracks !== "none" ? tracks.split(" ").length : 1;
+        };
+
+        const layout = () => {
+          const n = columnCount();
+          if (n === columns) return;
+          columns = n;
+
+          grid.replaceChildren();
+          const cols = Array.from({ length: n }, () => {
+            const col = document.createElement("div");
+            col.className = "flex min-w-0 flex-col gap-6 sm:gap-8 lg:gap-10";
+            grid.appendChild(col);
+            return col;
+          });
+          cards.forEach((card, i) => cols[i % n].appendChild(card));
+        };
+
+        layout();
+
+        let pending;
+        window.addEventListener("resize", () => {
+          clearTimeout(pending);
+          pending = setTimeout(layout, 150);
+        });
+      })();
+    </script>
   </section>
 </Base>

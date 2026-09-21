@@ -14,18 +14,6 @@ awards:
 cover: ./main.jpg
 featured: true
 order: 60
-interludes:
-  - after: 2
-    body: >-
-      Rather than a forced preservation that would fossilize the city, the plan
-      establishes the Gloucester Maritime Trade Campus as an anchor institution —
-      giving a fading fishing town the social, economic, and political means to
-      reinvigorate its own identity.
-  - after: 5
-    body: >-
-      Key nodes along the shoreline fuse traditional trades — fishing, logistics,
-      boat crafting, ship maintenance — with new curatorial and educational
-      programs, holding the city's contentious forces in productive tension.
 ---
 
 The historic identity of Gloucester, a once-renowned New England marine town, is under siege: global capital challenges its deep-rooted sense of place while tourism development erases local fishing traditions. Rather than a forced preservation that would turn the city into a cultural fossil, the plan establishes the Gloucester Maritime Trade Campus as an anchor institution, giving the city the social, economic, and political impetus to reinvigorate its identity on its own terms.

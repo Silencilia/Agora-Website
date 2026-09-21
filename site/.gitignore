@@ -1,5 +1,7 @@
 # build output
 dist/
+# local scratch (backups, working PDFs, one-off scripts)
+tmp/
 # generated types
 .astro/
 # dependencies

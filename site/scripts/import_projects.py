@@ -25,7 +25,6 @@ QUALITY = 85
 # Raw folder name -> URL slug
 SLUGS = {
     "CAA Mengyuan Campus": "caa-mengyuan-campus",
-    "Capital Cemetery Complex": "capital-cemetery-complex",
     "computation": "computation",
     "Contentious City": "contentious-city",
     "Custom Crafted Component": "custom-crafted-component",
@@ -33,6 +32,7 @@ SLUGS = {
     "Imprint of Sound": "imprint-of-sound",
     "Jinqiao Art Center": "jinqiao-art-center",
     "Miami Studio": "miami-studio",
+    "Minsheng Wharf": "minsheng-wharf",
     "Monument of Everyone": "monument-of-everyone",
     "NIO House": "nio-house",
     "PITA & BLOOM": "pita-bloom",
@@ -43,9 +43,7 @@ SLUGS = {
 }
 
 # Folders without a MAIN.* image fall back to a named file
-MAIN_OVERRIDES = {
-    "Capital Cemetery Complex": "archive mechanism.jpg",
-}
+MAIN_OVERRIDES: dict[str, str] = {}
 
 
 def find_main(folder: Path) -> Path | None:

@@ -1,48 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import portrait from "../assets/minquan-wang-portrait.jpg";
-
-const experience = [
-  {
-    firm: "Kohn Pedersen Fox, New York",
-    role: "Associate Principal",
-    period: "2026 —",
-  },
-  {
-    firm: "Rockwell Group, New York",
-    role: "Architect",
-    period: "2025 — 2026",
-  },
-  {
-    firm: "David Chipperfield Architects, Shanghai",
-    role: "Architect",
-    period: "2022 — 2025",
-  },
-  {
-    firm: "Kohn Pedersen Fox, New York",
-    role: "Architectural Designer",
-    period: "2019 — 2021",
-  },
-];
-
-const education = [
-  {
-    school: "Yale University School of Architecture",
-    degree: "Post-Professional M.Arch — H.I. Feldman Prize, 2017",
-    period: "2016 — 2018",
-  },
-  {
-    school: "Tsinghua University School of Architecture",
-    degree: "M.Arch",
-    period: "2014 — 2016",
-  },
-  {
-    school: "Tsinghua University School of Architecture",
-    degree: "B.Arch",
-    period: "2010 — 2014",
-  },
-];
+import Logo from "../components/Logo.astro";
 
 const awards = [
   "Gold Winner, A' Design Award — West Zhejiang Agro-Tech Industry Park, 2025",
@@ -54,18 +12,6 @@ const awards = [
   "Gold & Silver Winner, London Design Awards, 2024",
   "Honorable Mention, Non Architecture Competitions, 2019",
   "H.I. Feldman Prize, Yale School of Architecture, 2017",
-];
-
-const publications = [
-  "Folding Jingdezhen, Tongji University Press, 2026",
-  "“Easy Office”, Within or Without, Actar D., 2020",
-  "“Détournement of Allure”, Yale Constructs, Fall 2017",
-  "“Maritime Thinkbelt”, Retrospecta 40, Actar D., 2017",
-];
-
-const teaching = [
-  "Option Studio IV, Critic — Tongji University CAUP, 2023 — 2024",
-  "“Atlas of the Unseen Shanghai” joint workshop, Guest Critic — HKU / MIT City Science / City Science Lab Tongji, 2024",
 ];
 
 const exhibitions = [
@@ -81,40 +27,22 @@ const exhibitions = [
   <section class="mx-auto max-w-screen-2xl px-6 py-14 md:px-10 md:py-20">
 
     <div class="mt-16 grid gap-12 md:mt-24 md:grid-cols-[280px_1fr]">
-      <div>
-        <div class="aspect-[3/4] overflow-hidden bg-mist">
-          <Image
-            src={portrait}
-            alt="Portrait of Minquan Wang"
-            widths={[280, 560, 840]}
-            sizes="(min-width: 768px) 280px, 100vw"
-            class="h-full w-full object-cover"
-          />
+      <div class="flex items-center justify-center md:justify-start">
+        <div class="flex flex-col items-center gap-10 md:items-start">
+          <Logo class="h-40 w-auto md:h-56" />
         </div>
-        <p class="eyebrow mt-3">Minquan Wang, AIA, LEED GA</p>
       </div>
 
       <div class="prose-agora space-y-5 !max-w-2xl text-[0.975rem] leading-relaxed">
         <p>
-          Agora is a full-service architecture and interior design studio based in New York. Founded by Minquan Wang in 2024, it aims to build the public realm at the intersection of technology and culture, explore the social value of architecture, and facilitate connections between communities.
+          Agora is an architecture studio based in New York. It aims to build the public realm and facilitate thought exchanges with the social potency of architecture.
         </p>
         <p>
-          Minquan serves as an Associate Principal at Kohn Pedersen Fox in New York.
-          He previously practiced at Rockwell Group in New York and at David
-          Chipperfield Architects in Shanghai. Minquan has an extensive experience navigating complex urban commercial and civic projects. 
-          At KPF, he was the lead designer for MixC Chongqing Mall reconstruction and major contributors to numerous large scale mixed-use developments including the International Land-Sea Center in Chongqing, Thamrin Nine in Jakarta, and Baker Circle in Hong Kong.
-          At David Chipperfield Architects, he was a leading figure in the Shanghai office's design-focused projects as well as its cultural and academic engagements. He led the design of internationally noted competitions including the Jinqiao Art Center
-          and the Minsheng Wharf masterplan, served as project architect for
-          RAM Assembles 2023, and was the design lead
-          for NIO House at Beijing Huaxi Live.
+          Agora was founded by Minquan Wang in 2022. Minquan is a registered architect in Connecticut and a member of the American Institute of Architecture. He serves professionally as an Associate Principal at Kohn Pedersen Fox in New York, where he was involved in several large-scale high-profile mixed-use development projects including the Chongqing International Land-Sea Center, Baker Circle, and Thamrin Nine. 
+          He previously served as an Architect at David Chipperfield Architects Shanghai, where he played critical roles in the Shanghai office's design-focused projects and cultural/academic engagements, including being the leading designer in high profile competitions such as Jinqiao Art Center and Minsheng Wharf Masterplan, and the project architect for the 2023 RAM Assembles. 
         </p>
         <p>
-          Minquan's independent work has been recognized internationally: the winning
-          proposal for the West Zhejiang Agro-Tech Industry Park received the
-          A' Design Award Gold Prize (2025) among numerous other honors, and
-          his proposal for the China Academy of Art Mengyuan Campus was
-          similarly premiated. His projects have been exhibited in New York,
-          Venice, London, and Como.
+         Minquan's independent works have received numerous accolades and awards internationally. His winning proposal of West Zhejiang Agro-Tech Campus, collaborated with SIZE Arch and ZJUT Engineering Design Group, was the Gold Winner of A' Design Award 2025, Gold Winner of APR Urban Design & Architecture Design Awards 2025, Bronze Prize winner of International Design Awards 2024, and Gold Winner of NY Architectural Design Awards. His proposal for China Academy of Art Mengyuan Campus, was the Bronze Prize winner of International Design Awards 2024, and Silver Winner of MUSE Design Awards 2024.
         </p>
         <p>
           Minquan taught the Option Studio at Tongji University in Shanghai and
@@ -125,65 +53,18 @@ const exhibitions = [
       </div>
     </div>
 
-    <div class="mt-20 grid gap-12 border-t border-line pt-12 md:mt-28 md:grid-cols-3">
+    <div class="mt-20 grid gap-12 border-t border-line pt-12 md:mt-28 md:grid-cols-2">
       <div>
-        <h2 class="eyebrow">Experience</h2>
-        <ul class="mt-5 space-y-4 text-sm">
-          {
-            experience.map((item) => (
-              <li>
-                <p class="text-ink/85">{item.firm}</p>
-                <p class="text-ink/50">
-                  {item.role}, {item.period}
-                </p>
-              </li>
-            ))
-          }
-        </ul>
-
-        <h2 class="eyebrow mt-10">Teaching</h2>
-        <ul class="mt-5 space-y-3 text-sm text-ink/70">
-          {teaching.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="eyebrow">Education</h2>
-        <ul class="mt-5 space-y-4 text-sm">
-          {
-            education.map((item) => (
-              <li>
-                <p class="text-ink/85">{item.school}</p>
-                <p class="text-ink/50">
-                  {item.degree}, {item.period}
-                </p>
-              </li>
-            ))
-          }
-        </ul>
-
-        <h2 class="eyebrow mt-10">Certification</h2>
-        <ul class="mt-5 space-y-2 text-sm text-ink/70">
-          <li>Registered Architect, Connecticut</li>
-          <li>AIA Member, New York Chapter</li>
-          <li>LEED Green Associate</li>
-        </ul>
-
-        <h2 class="eyebrow mt-10">Exhibitions</h2>
-        <ul class="mt-5 space-y-2 text-sm text-ink/70">
-          {exhibitions.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="eyebrow">Selected awards</h2>
+        <h2 class="eyebrow">Awards</h2>
         <ul class="mt-5 space-y-2 text-sm text-ink/70">
           {awards.map((item) => <li>{item}</li>)}
         </ul>
+      </div>
 
-        <h2 class="eyebrow mt-10">Publications</h2>
+      <div>
+        <h2 class="eyebrow">Exhibitions</h2>
         <ul class="mt-5 space-y-2 text-sm text-ink/70">
-          {publications.map((item) => <li>{item}</li>)}
+          {exhibitions.map((item) => <li>{item}</li>)}
         </ul>
       </div>
     </div>

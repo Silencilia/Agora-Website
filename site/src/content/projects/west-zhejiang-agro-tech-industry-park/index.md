@@ -13,16 +13,10 @@ awards:
   - Gold Winner, NY Architectural Design Awards, 2024
   - Bronze Prize, International Design Awards, 2024
 cover: ./main.jpg
-interludes:
-  - after: 2
-    body: >-
-      The campus negotiates between agricultural landscape and technological
-      infrastructure, organizing research, production, and public exchange into
-      a continuous ground where farming and fabrication meet.
 featured: true
-order: 40
+order: 10
 ---
 
-The winning proposal for the West Zhejiang Agro-Tech Industry Park organizes research, production, and public exchange into a campus negotiating between agricultural landscape and technological infrastructure. The project has been recognized internationally, including the A' Design Award Gold Prize and exhibitions in New York and Como.
+The winning proposal for the West Zhejiang Agro-Tech Industry Park organizes research, production, and public exchange into a campus negotiating between agricultural landscape and technological infrastructure — a continuous ground where farming and fabrication meet. The project has been recognized internationally, including the A' Design Award Gold Prize and exhibitions in New York and Como.
 
 <!-- TODO: expand narrative from competition materials -->
