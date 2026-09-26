@@ -4,7 +4,7 @@ subtitle: Cascading platforms for public life
 category: professional
 year: "2024"
 location: Quzhou, China
-status: Winning competition entry
+status: Awarded
 role: Design lead
 collaborators: SIZE Arch; ZJUT Engineering Design Group
 awards:

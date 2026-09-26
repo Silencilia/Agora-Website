@@ -2,7 +2,6 @@
 title: Imprint of Sound
 subtitle: Interactive installation
 category: research
-status: Installation
 role: Designer and fabricator
 collaborators: Le Li, Lu Zhang, Xiyao Wang, Yi Xu, Zijian Wang
 cover: ./main.jpg

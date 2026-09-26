@@ -4,7 +4,7 @@ subtitle: Contentious City
 category: academic
 year: "2017"
 location: Gloucester, MA, US
-status: Yale School of Architecture, post-professional studio
+status: Proposal
 role: Designer — instructors Edward Mitchell and Aniket Shahane
 collaborators: Istvan van Vianen
 awards:

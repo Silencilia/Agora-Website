@@ -3,7 +3,7 @@ title: Monument of Everyone
 subtitle: A monument to ordinary lives
 category: personal
 year: "2019"
-status: Competition entry
+status: Competition
 role: Designer
 collaborators: Xiyao Wang
 awards:

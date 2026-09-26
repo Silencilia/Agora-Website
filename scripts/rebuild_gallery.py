@@ -4,8 +4,8 @@ Cover  : the source file numbered 1  -> main.jpg (max 2400 px)
 Gallery: every other file, numeric order -> g01.jpg, g02.jpg, ... (max 2000 px)
          (files listed in MARKERS get a layout suffix, e.g. g09-row.jpg)
 """
-from PIL import Image, ImageOps
-import os, re
+from PIL import Image, ImageOps, ImageCms
+import io, os, re
 
 Image.MAX_IMAGE_PIXELS = None
 MAIN_DIM, GAL_DIM, QUALITY = 2400, 2000, 85
@@ -20,7 +20,16 @@ JOBS = [
     ('Minsheng Wharf', 'minsheng-wharf'),
     ('West Kowloon Topside Development', 'west-kowloon-topside-development'),
     ('International Land-Sea Center', 'international-land-sea-center'),
+    ('Baker Circle', 'baker-circle'),
 ]
+
+# slug -> the only source files to use, in order (first one is the cover).
+#   Baker Circle: 1-14 only (the 2943_* photos in that folder are left out;
+#   7 is a TIFF, 14 is Display P3 and is converted to sRGB).
+INCLUDE = {
+    'baker-circle': ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.tif',
+                     '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg'],
+}
 
 # slug -> {source file: layout marker}; see ProjectGallery.astro for the markers.
 MARKERS = {
@@ -41,8 +50,13 @@ def numkey(f):
 def derive(src, dst, max_dim):
     with Image.open(src) as im:
         im = ImageOps.exif_transpose(im)
+        icc = im.info.get('icc_profile')
         if im.mode != 'RGB':
             im = im.convert('RGB')
+        if icc:  # bring wide-gamut sources (e.g. Display P3) into sRGB
+            prof = ImageCms.ImageCmsProfile(io.BytesIO(icc))
+            if 'sRGB' not in ImageCms.getProfileDescription(prof):
+                im = ImageCms.profileToProfile(im, prof, ImageCms.createProfile('sRGB'), outputMode='RGB')
         im.thumbnail((max_dim, max_dim), Image.LANCZOS)
         im.save(dst, 'JPEG', quality=QUALITY, progressive=True, optimize=True)
         return im.size, os.path.getsize(dst) // 1024
@@ -56,6 +70,8 @@ for raw, slug in JOBS:
              if os.path.isfile(os.path.join(srcdir, f))
              and f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))]
     files.sort(key=numkey)
+    if slug in INCLUDE:
+        files = INCLUDE[slug]
 
     cover = next((f for f in files if numkey(f) == (0, 1)), None)
     assert cover, f'no source numbered 1 in {raw}'

@@ -4,7 +4,7 @@ subtitle: Culver City concept art studio
 category: academic
 year: "2018"
 location: Los Angeles, CA, US
-status: Yale School of Architecture, advanced design studio
+status: Proposal
 role: Designer — instructors Florencia Pita, Jackilin Hah Bloom, Miroslava Brooks
 cover: ./main.jpg
 order: 120

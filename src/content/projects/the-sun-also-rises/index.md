@@ -4,7 +4,7 @@ subtitle: Museum for a film
 category: personal
 year: "2015"
 location: Kunming, China
-status: Concept
+status: Proposal
 role: Designer
 collaborators: Xiyao Wang
 cover: ./main.jpg

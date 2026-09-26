@@ -4,7 +4,7 @@ subtitle: Miami Beach oceanfront development
 category: academic
 year: "2017"
 location: Miami Beach, FL, US
-status: Yale School of Architecture studio
+status: Proposal
 role: Designer — instructors Emre Arolat, Gonca Paşolar, Kyle Dugdale
 collaborators: Istvan van Vianen
 cover: ./main.jpg

@@ -4,7 +4,7 @@ subtitle: Three towers around a shared arrival plaza
 category: professional
 year: "2021"
 location: Hong Kong
-status: Invited competition and planning submission
+status: Awarded
 role: Designer of the client-selected competition scheme and main contributor to the office towers — Kohn Pedersen Fox Associates
 collaborators: JCFO (landscape architect)
 credit:

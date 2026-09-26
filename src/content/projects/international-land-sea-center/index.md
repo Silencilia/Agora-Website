@@ -4,7 +4,7 @@ subtitle: Podium and rail-station facades for a mega-development
 category: professional
 year: "2019 — 2020"
 location: Chongqing, China
-status: Schematic design through tender documentation
+status: Built
 role: Main contributor to the retail podium and LRT station facade design — Kohn Pedersen Fox Associates
 credit:
   text: As designer for

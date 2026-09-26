@@ -4,7 +4,7 @@ subtitle: A social condenser under one roof
 category: professional
 year: "2022 — 2023"
 location: Shanghai, China
-status: Invited competition
+status: Competition
 role: Design Lead, David Chipperfield Architects Shanghai
 credit:
   text: As project leader for

@@ -4,7 +4,7 @@ subtitle: An industrial waterfront reopened to the city
 category: professional
 year: "2023 — 2024"
 location: Shanghai, China
-status: Invited competition
+status: Competition
 role: Design lead for riverfront warehouses, industrial heritage route, and landscape integration — David Chipperfield Architects Shanghai
 credit:
   text: As design lead for

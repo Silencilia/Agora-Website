@@ -4,7 +4,7 @@ subtitle: Formal analysis and project
 category: academic
 year: "2018"
 location: New Haven, CT, US
-status: Yale School of Architecture, Advanced Design Studio
+status: Proposal
 collaborators: Winston Yuen
 cover: ./main.jpg
 order: 100
