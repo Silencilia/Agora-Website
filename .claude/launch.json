@@ -4,7 +4,7 @@
     {
       "name": "agora-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "E:\\_AGORA\\_Website\\site"],
+      "runtimeArgs": ["run", "dev"],
       "port": 4321,
       "autoPort": true
     }

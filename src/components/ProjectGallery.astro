@@ -1,0 +1,420 @@
+---
+import { Image } from "astro:assets";
+
+/** Text placed in the gallery right after one image (see content.config.ts). */
+export type GalleryNote = {
+  after: string;
+  caption?: string;
+  title?: string;
+  subtitle?: string;
+  text?: string;
+  /** Put the title/text beside the image; the image takes this share of the width. */
+  beside?: number;
+  /** With `beside`: align the text to the top (default) or bottom of the image. */
+  align?: "start" | "end";
+  /**
+   * "-set": show the image at this share of the column width, centred.
+   * "-row": this image's share of the row's width.
+   */
+  width?: number;
+  /** "-row": put this note's title/text under its own image, not after the row. */
+  under?: boolean;
+  /** "-row": stack this image under the previous one, in the same column. */
+  stack?: boolean;
+  /** "-row": gap between the row's images, in px (at every screen size). */
+  gap?: number;
+  /** Space after this image's row, in px (replaces the gallery's usual spacing). */
+  below?: number;
+  /** With `beside`: a small image (an "x01.jpg" in the project folder) set in the text column. */
+  aside?: string;
+  /** Put the `aside` image above the text instead of below it. */
+  asideFirst?: boolean;
+  /** The `aside` image's share of the text column's width (default: full width). */
+  asideWidth?: number;
+  /** A caption set under the `aside` image. */
+  asideCaption?: string;
+};
+
+interface Props {
+  slug: string;
+  /**
+   * "grid" (default): lay images out by aspect ratio inside the page margins.
+   * "stack": one image per row, each at the full width of the page margins.
+   *
+   * In "grid", a file name can also fix how that one image is shown:
+   *   g03-full.jpg -> hero, edge to edge at the full screen width
+   *   g04-set.jpg  -> a composed group (e.g. a portfolio page's diagrams),
+   *                   shown whole inside the margins, never paired or cropped
+   *   g12-pair.jpg + g13-pair.jpg -> consecutive "-pair" images sit side by
+   *                   side, edge to edge (e.g. a with/without comparison)
+   *   g04-row.jpg + g05-row.jpg -> consecutive "-row" images sit side by side
+   *                   inside the margins; a note's `width` sets each one's share
+   *                   of the row (otherwise they share one height)
+   *   g06a-row.jpg + g06b-row.jpg, g07a-row.jpg + g07b-row.jpg -> lettered
+   *                   "-row" images group by number: one row per number
+   *   g05a-row.jpg + g05b-row.jpg + g05c-row.jpg with `stack` on g05c's note
+   *                   -> g05c sits under g05b in the second column
+   */
+  variant?: "grid" | "stack";
+  /** Image shown before the gallery images (e.g. the cover). */
+  lead?: ImageMetadata;
+  /** Captions and text blocks keyed to image numbers ("g05"). Grid only. */
+  notes?: GalleryNote[];
+}
+
+const { slug, variant = "grid", lead, notes = [] } = Astro.props;
+
+// Eagerly load every project's gallery images, then keep this project's.
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/content/projects/*/g*.{jpg,jpeg,png}",
+  { eager: true },
+);
+const prefix = `/src/content/projects/${slug}/`;
+// Small companion images for text columns: x01.jpg, x02.jpg ...
+const asideModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/content/projects/*/x*.{jpg,jpeg,png}",
+  { eager: true },
+);
+const asideImage = (stem?: string) =>
+  stem
+    ? Object.entries(asideModules).find(([p]) => p.startsWith(prefix + stem + "."))?.[1].default
+    : undefined;
+type Mode = "auto" | "bleed" | "set" | "pair" | "row";
+type Entry = { img: ImageMetadata; mode: Mode; key: string };
+const entries: Entry[] = Object.entries(modules)
+  .filter(([path]) => path.startsWith(prefix))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, m]) => {
+    const file = path.slice(prefix.length);
+    const mode: Mode = /-full\.\w+$/.test(file)
+      ? "bleed"
+      : /-set\.\w+$/.test(file)
+        ? "set"
+        : /-pair\.\w+$/.test(file)
+          ? "pair"
+          : /-row\.\w+$/.test(file)
+            ? "row"
+            : "auto";
+    return { img: m.default, mode, key: file.replace(/[-.].*$/, "") };
+  });
+if (lead) entries.unshift({ img: lead, mode: "auto", key: "" });
+const images = entries.map((e) => e.img);
+
+const ratio = (im: ImageMetadata) => im.width / im.height;
+
+type Row = {
+  kind: "full" | "landscape" | "portrait" | "bleed" | "set" | "pair" | "row";
+  imgs: ImageMetadata[];
+  keys: string[];
+};
+
+// Build rows: named heroes/sets/pairs as marked; otherwise wide panoramas
+// full-width, portraits paired, others single.
+const rows: Row[] = [];
+let i = 0;
+while (i < entries.length) {
+  const { img: im, mode, key } = entries[i];
+  const r = ratio(im);
+  if (mode === "pair" || mode === "row") {
+    const run: Entry[] = [];
+    // Lettered "-row" images (g06a, g06b) form one row per number.
+    const group = (k: string) => k.match(/^g\d+(?=[a-z]$)/)?.[0];
+    const g = group(key);
+    while (
+      i < entries.length &&
+      entries[i].mode === mode &&
+      (mode !== "row" || group(entries[i].key) === g)
+    )
+      run.push(entries[i++]);
+    rows.push({ kind: mode, imgs: run.map((e) => e.img), keys: run.map((e) => e.key) });
+  } else if (mode !== "auto") {
+    rows.push({ kind: mode, imgs: [im], keys: [key] });
+    i += 1;
+  } else if (r >= 1.9) {
+    rows.push({ kind: "full", imgs: [im], keys: [key] });
+    i += 1;
+  } else if (r <= 0.85) {
+    const next = entries[i + 1];
+    if (next && next.mode === "auto" && ratio(next.img) <= 0.85) {
+      rows.push({ kind: "portrait", imgs: [im, next.img], keys: [key, next.key] });
+      i += 2;
+    } else {
+      rows.push({ kind: "portrait", imgs: [im], keys: [key] });
+      i += 1;
+    }
+  } else {
+    rows.push({ kind: "landscape", imgs: [im], keys: [key] });
+    i += 1;
+  }
+}
+
+const notesFor = (row: Row) => notes.filter((n) => row.keys.includes(n.after));
+const besideNote = (row: Row) =>
+  row.kind === "set" ? notesFor(row).find((n) => n.beside) : undefined;
+const setWidth = (row: Row) =>
+  row.kind === "set" ? notesFor(row).find((n) => n.width)?.width : undefined;
+const underNotes = (key: string) => notes.filter((n) => n.after === key && n.under);
+/** A "-row" row as side-by-side columns; a note's `stack` puts its image under the previous one. */
+const rowColumns = (row: Row) => {
+  const cols: { share: number; cells: { img: ImageMetadata; key: string }[] }[] = [];
+  row.imgs.forEach((img, n) => {
+    const key = row.keys[n];
+    const own = notes.filter((x) => x.after === key);
+    if (cols.length && own.some((x) => x.stack)) cols[cols.length - 1].cells.push({ img, key });
+    else cols.push({ share: own.find((x) => x.width)?.width ?? ratio(img), cells: [{ img, key }] });
+  });
+  return cols;
+};
+const rowGap = (row: Row) =>
+  notes.find((n) => row.keys.includes(n.after) && n.gap !== undefined)?.gap;
+const rowBelow = (row: Row) =>
+  notes.find((n) => row.keys.includes(n.after) && n.below !== undefined)?.below;
+const paragraphs = (text?: string) =>
+  (text ?? "").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+---
+
+{
+  variant === "stack" && images.length > 0 && (
+    <div class="mx-auto space-y-6 px-6 md:space-y-10 lg:px-40 xl:px-80">
+      {images.map((img, n) => (
+        <div class="overflow-hidden bg-mist">
+          <Image
+            src={img}
+            alt=""
+            widths={[800, 1400, 2000]}
+            sizes="(min-width: 1536px) 1472px, 95vw"
+            loading={n === 0 ? "eager" : "lazy"}
+            class="block h-auto w-full"
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+{
+  variant === "grid" && images.length > 0 && (
+    <div class="space-y-6 md:space-y-10">
+      {rows.map((item) => (
+        <Fragment>
+          {item.kind === "bleed" ? (
+            <div>
+              <div class="bg-mist">
+                <Image
+                  src={item.imgs[0]}
+                  alt=""
+                  widths={[800, 1400, 2000, 2400]}
+                  sizes="100vw"
+                  loading="lazy"
+                  class="block h-auto w-full"
+                />
+              </div>
+              {notesFor(item)
+                .filter((n) => n.caption)
+                .map((n) => (
+                  <p class="mx-auto mt-3 px-6 text-xs text-ink/50 lg:px-40 xl:px-80">{n.caption}</p>
+                ))}
+            </div>
+          ) : item.kind === "pair" ? (
+            <div class="grid gap-2 sm:grid-cols-2 md:gap-3">
+              {item.imgs.map((img) => (
+                <div class="bg-mist">
+                  <Image
+                    src={img}
+                    alt=""
+                    widths={[600, 1000, 1400, 2000]}
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    loading="lazy"
+                    class="block h-auto w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div
+              class="mx-auto px-6 lg:px-40 xl:px-80"
+              style={rowBelow(item) !== undefined ? `margin-block-end: ${rowBelow(item)}px` : undefined}
+            >
+              {item.kind === "row" ? (
+                // Side by side inside the margins; each image's share of the
+                // row comes from its note's `width`, else from its proportions.
+                <div
+                  style={rowGap(item) !== undefined ? `--row-gap: ${rowGap(item)}px` : undefined}
+                  class:list={[
+                    "grid gap-[var(--row-gap,1.5rem)] sm:flex sm:gap-[var(--row-gap,2rem)] md:gap-[var(--row-gap,2.5rem)]",
+                    item.keys.some((k) => underNotes(k).length) ? "items-start" : "items-center",
+                  ]}
+                >
+                  {rowColumns(item).map((col) => (
+                    <div
+                      class:list={[col.cells.length > 1 && "space-y-8 md:space-y-10"]}
+                      style={`flex: ${col.share} 1 0%; min-width: 0`}
+                    >
+                      {col.cells.map(({ img, key }) => (
+                        <div>
+                          <Image
+                            src={img}
+                            alt=""
+                            widths={[500, 900, 1400, 2000]}
+                            sizes="(min-width: 640px) 50vw, 95vw"
+                            loading="lazy"
+                            class="block h-auto w-full"
+                          />
+                          {underNotes(key).map((x) => (
+                            <div class="prose-agora mt-4">
+                              {x.title && <h2 class:list={["eyebrow", !x.subtitle && "mb-3"]}>{x.title}</h2>}
+                              {x.subtitle && <p class="!mt-0 mb-3 text-ink/60">{x.subtitle}</p>}
+                              {paragraphs(x.text).map((p) => (
+                                <p>{p}</p>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : item.kind === "set" && besideNote(item) ? (
+                // Image and its text side by side, as on the portfolio page.
+                <div
+                  class="grid gap-6 md:[grid-template-columns:var(--cols)] md:gap-10"
+                  style={`--cols: minmax(0, ${besideNote(item)!.beside}fr) minmax(0, ${1 - besideNote(item)!.beside!}fr)`}
+                >
+                  <div>
+                    <Image
+                      src={item.imgs[0]}
+                      alt=""
+                      widths={[600, 1000, 1400, 2000]}
+                      sizes="(min-width: 768px) 60vw, 95vw"
+                      loading="lazy"
+                      class="block h-auto w-full"
+                    />
+                    {notesFor(item)
+                      .filter((n) => n.caption)
+                      .map((n) => (
+                        <p class="mt-3 text-center text-sm text-ink/60">{n.caption}</p>
+                      ))}
+                  </div>
+                  <div class:list={["prose-agora", besideNote(item)!.align === "end" && "self-end"]}>
+                    {besideNote(item)!.asideFirst && asideImage(besideNote(item)!.aside) && (
+                      <figure class="mb-5">
+                        <Image
+                          src={asideImage(besideNote(item)!.aside)!}
+                          alt=""
+                          widths={[400, 800, 1200]}
+                          sizes="(min-width: 768px) 25vw, 60vw"
+                          loading="lazy"
+                          class="block h-auto w-full"
+                          style={besideNote(item)!.asideWidth ? `width: ${besideNote(item)!.asideWidth! * 100}%` : undefined}
+                        />
+                        {besideNote(item)!.asideCaption && (
+                          <figcaption class="mt-2 text-sm text-ink/60">{besideNote(item)!.asideCaption}</figcaption>
+                        )}
+                      </figure>
+                    )}
+                    {besideNote(item)!.title && <h2 class="eyebrow">{besideNote(item)!.title}</h2>}
+                    {besideNote(item)!.subtitle && (
+                      <p class="!mt-0 mb-3 text-ink/60">{besideNote(item)!.subtitle}</p>
+                    )}
+                    {besideNote(item)!.title && !besideNote(item)!.subtitle && <div class="mb-3" />}
+                    {paragraphs(besideNote(item)!.text).map((p) => (
+                      <p>{p}</p>
+                    ))}
+                    {!besideNote(item)!.asideFirst && asideImage(besideNote(item)!.aside) && (
+                      <figure class="mt-5">
+                        <Image
+                          src={asideImage(besideNote(item)!.aside)!}
+                          alt=""
+                          widths={[400, 800, 1200]}
+                          sizes="(min-width: 768px) 25vw, 60vw"
+                          loading="lazy"
+                          class="block h-auto w-full"
+                          style={besideNote(item)!.asideWidth ? `width: ${besideNote(item)!.asideWidth! * 100}%` : undefined}
+                        />
+                        {besideNote(item)!.asideCaption && (
+                          <figcaption class="mt-2 text-sm text-ink/60">{besideNote(item)!.asideCaption}</figcaption>
+                        )}
+                      </figure>
+                    )}
+                  </div>
+                </div>
+              ) : item.kind === "set" ? (
+                <Image
+                  src={item.imgs[0]}
+                  alt=""
+                  widths={[800, 1400, 2000, 2400]}
+                  sizes="(min-width: 1536px) 1472px, 95vw"
+                  loading="lazy"
+                  class="mx-auto block h-auto w-full"
+                  style={setWidth(item) ? `width: ${setWidth(item)! * 100}%` : undefined}
+                />
+              ) : item.kind === "portrait" && item.imgs.length === 2 ? (
+                // Paired portraits share one aspect-ratio box so both fill their
+                // cell (object-cover) instead of leaving blank space below the
+                // shorter image. Use the pair's mean ratio to minimise cropping.
+                <div class="grid gap-4 sm:grid-cols-2 md:gap-6">
+                  {item.imgs.map((img) => (
+                    <div
+                      class="overflow-hidden bg-mist"
+                      style={`aspect-ratio:${(ratio(item.imgs[0]) + ratio(item.imgs[1])) / 2}`}
+                    >
+                      <Image
+                        src={img}
+                        alt=""
+                        widths={[500, 900, 1400]}
+                        sizes="(min-width: 1536px) 728px, (min-width: 640px) 46vw, 92vw"
+                        loading="lazy"
+                        class="h-full w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : item.kind === "portrait" ? (
+                <div class="mx-auto max-w-xl overflow-hidden bg-mist">
+                  <Image
+                    src={item.imgs[0]}
+                    alt=""
+                    widths={[500, 900, 1400]}
+                    sizes="(min-width: 1536px) 728px, (min-width: 640px) 46vw, 92vw"
+                    loading="lazy"
+                    class="h-auto w-full"
+                  />
+                </div>
+              ) : (
+                <div class="overflow-hidden bg-mist">
+                  <Image
+                    src={item.imgs[0]}
+                    alt=""
+                    widths={[800, 1400, 2000]}
+                    sizes="(min-width: 1536px) 1472px, 95vw"
+                    loading="lazy"
+                    class="h-auto w-full"
+                  />
+                </div>
+              )}
+              {!besideNote(item) &&
+                notesFor(item)
+                  .filter((n) => n.caption)
+                  .map((n) => (
+                    <p class="mt-3 text-center text-sm text-ink/60">{n.caption}</p>
+                  ))}
+            </div>
+          )}
+          {notesFor(item)
+            .filter((n) => (n.title || n.text) && n !== besideNote(item) && !(item.kind === "row" && n.under))
+            .map((n) => (
+              <div class="mx-auto px-6 py-4 md:py-8 lg:px-40 xl:px-80">
+                <div class="prose-agora">
+                  {n.title && <h2 class:list={["eyebrow", !n.subtitle && "mb-3"]}>{n.title}</h2>}
+                  {n.subtitle && <p class="!mt-0 mb-3 text-ink/60">{n.subtitle}</p>}
+                  {paragraphs(n.text).map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+        </Fragment>
+      ))}
+    </div>
+  )
+}

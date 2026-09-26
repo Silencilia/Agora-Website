@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Projects">
+  <section class="mx-auto max-w-screen-3xl px-6 py-14 lg:px-40 xl:px-80 md:py-20">
+    <header class="mb-12 flex items-baseline justify-end md:mb-16">
+    </header>
+
+    {/*
+      Simple grid: equal columns, cards read left-to-right in `order`.
+      Each card takes the proportion of its own cover (see ProjectCard
+      `native`), so cards differ in height; each is centred vertically
+      within its row.
+    */}
+    <div
+      class="grid grid-cols-1 items-center gap-x-6 gap-y-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-16 xl:gap-x-15"
+    >
+      {
+        projects.map((project, i) => (
+          <ProjectCard project={project} native eager={i < 3} />
+        ))
+      }
+    </div>
+  </section>
+</Base>

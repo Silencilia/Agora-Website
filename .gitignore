@@ -1,11 +1,11 @@
 # ---------------------------------------------------------------------------
 # AGORA website repository
 #
-# The repo tracks the website (site/) plus its small branding source and the
+# The repo root IS the Astro website, plus its small branding source and the
 # web-optimized project images. The multi-gigabyte RAW asset archive is kept
 # local only — several files exceed GitHub's 100 MB limit, and the web-ready
-# derivatives are generated into site/src/content/projects/ by
-# site/scripts/import_projects.py.
+# derivatives are generated into src/content/projects/ by
+# scripts/import_projects.py.
 # ---------------------------------------------------------------------------
 
 # Raw asset archive (local working files, not for git)
@@ -20,6 +20,9 @@ dist/
 .output/
 .vercel/
 .netlify/
+
+# Local scratch (backups, working PDFs, one-off scripts)
+/tmp/
 
 # Large binary formats (safety net if any land inside tracked folders)
 *.psd
@@ -47,3 +50,7 @@ Desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Local cleanup / Python cache
+/_to_delete/
+__pycache__/

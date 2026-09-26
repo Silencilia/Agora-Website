@@ -1,0 +1,121 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import ArrowIcon from "./ArrowIcon.astro";
+
+// Explicit running order for the home showcase, independent of the
+// Projects-gallery `order` field.
+const showcaseOrder = [
+  "west-zhejiang-agro-tech-industry-park",
+  "caa-mengyuan-campus",
+  "rama",
+  "jinqiao-art-center",
+  "minsheng-wharf",
+  "nio-house",
+  "gloucester-maritime-trade-campus",
+  "the-sun-also-rises",
+];
+const rank = (id: string) => {
+  const i = showcaseOrder.indexOf(id);
+  return i === -1 ? Number.POSITIVE_INFINITY : i;
+};
+
+const featured = (
+  await getCollection("projects", ({ data }) => data.featured && !data.draft)
+).sort((a, b) => rank(a.id) - rank(b.id));
+---
+
+{/*
+  Full-viewport featured-projects window. It is `position: fixed`, so the
+  image stays still while the page content scrolls up over it (NADAAA-style
+  reveal). Each slide is a link to its project; prev/next cross-fade between
+  featured works.
+*/}
+<section
+  class="fixed inset-0 z-0 overflow-hidden bg-mist"
+  aria-roledescription="carousel"
+  aria-label="Featured projects"
+  data-showcase
+>
+  <div class="relative h-full w-full">
+    {
+      featured.map((p, i) => (
+        <a
+          href={`/projects/${p.id}/`}
+          class="absolute inset-0 block transition-opacity duration-[900ms] ease-out"
+          data-slide
+          style={`opacity:${i === 0 ? 1 : 0};pointer-events:${i === 0 ? "auto" : "none"}`}
+          aria-hidden={i === 0 ? undefined : "true"}
+          tabindex={i === 0 ? undefined : "-1"}
+        >
+          <Image
+            src={p.data.cover}
+            alt={p.data.title}
+            widths={[1200, 1800, 2600]}
+            sizes="100vw"
+            loading={i === 0 ? "eager" : "lazy"}
+            class="h-full w-full object-cover"
+          />
+          {/* scrim for caption legibility */}
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5"
+            style="background:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0) 100%)"
+          />
+          <span class="absolute bottom-0 left-0 p-[6vw] text-lg font-light tracking-tight text-white drop-shadow-md md:p-12 md:text-2xl">
+            {p.data.title}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <button
+    type="button"
+    data-prev
+    aria-label="Previous project"
+    class="group absolute top-1/2 left-[2vw] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-white/80 transition-colors hover:text-white md:left-6"
+  >
+    <ArrowIcon class="h-7 w-7 drop-shadow-md transition-transform group-hover:-translate-x-1 md:h-9 md:w-9" />
+  </button>
+  <button
+    type="button"
+    data-next
+    aria-label="Next project"
+    class="group absolute top-1/2 right-[2vw] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-white/80 transition-colors hover:text-white md:right-6"
+  >
+    <ArrowIcon class="h-7 w-7 rotate-180 drop-shadow-md transition-transform group-hover:translate-x-1 md:h-9 md:w-9" />
+  </button>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-showcase]");
+  if (root) {
+    const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+    let idx = 0;
+
+    const show = (n: number) => {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === idx;
+        slide.style.opacity = active ? "1" : "0";
+        slide.style.pointerEvents = active ? "auto" : "none";
+        if (active) {
+          slide.removeAttribute("aria-hidden");
+          slide.removeAttribute("tabindex");
+        } else {
+          slide.setAttribute("aria-hidden", "true");
+          slide.setAttribute("tabindex", "-1");
+        }
+      });
+    };
+
+    root.querySelector("[data-next]")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      show(idx + 1);
+    });
+    root.querySelector("[data-prev]")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      show(idx - 1);
+    });
+  }
+</script>
