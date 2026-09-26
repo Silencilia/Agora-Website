@@ -16,13 +16,14 @@ const awards = [
 ];
 ---
 
-<Base fullBleed>
-  <FeaturedShowcase />
+<Base>
+  {/*
+  Featured showcase hidden. To bring it back, change <Base> to <Base fullBleed>
+  and restore these two lines:
+    <FeaturedShowcase />
+    <div class="h-[100svh]" aria-hidden="true"></div>
+  */}
 
-  {/* Reserves the height of the fixed showcase so it shows through first */}
-  <div class="h-[100svh]" aria-hidden="true"></div>
-
-  {/* Content scrolls up over the fixed showcase */}
   <div class="relative z-10 bg-paper">
     <section
       class="mx-auto flex max-w-3xl flex-col items-center px-6 py-24 text-center md:py-36"

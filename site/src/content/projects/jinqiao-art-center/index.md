@@ -6,6 +6,10 @@ year: "2022 — 2023"
 location: Shanghai, China
 status: Invited competition
 role: Design Lead, David Chipperfield Architects Shanghai
+credit:
+  text: As project leader for
+  firm: David Chipperfield Architects
+  url: https://davidchipperfield.com
 cover: ./main.jpg
 featured: true
 order: 50

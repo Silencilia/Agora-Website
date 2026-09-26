@@ -11,17 +11,18 @@ interface Props {
 }
 
 const { project, eager = false, native = false } = Astro.props;
-const { title, cover, year, category } = project.data;
-
-const categoryLabel: Record<string, string> = {
-  professional: "Professional",
-  academic: "Academic",
-  personal: "Personal",
-  research: "Research",
-};
+const { title, cover, year, credit } = project.data;
+const href = `/projects/${project.id}/`;
 ---
 
-<a href={`/projects/${project.id}/`} class="group block">
+{/*
+  The whole card is clickable via a stretched link on the title (its ::after
+  covers the card). The firm credit link sits above it (relative z-10), so it
+  can be its own link without nesting <a> inside <a>.
+*/}
+<div
+  class="group relative transition-transform duration-500 ease-out will-change-transform hover:z-10 hover:scale-[1.03] focus-within:scale-[1.03]"
+>
   <div class:list={["overflow-hidden bg-mist", !native && "aspect-[4/3]"]}>
     <Image
       src={cover}
@@ -34,7 +35,6 @@ const categoryLabel: Record<string, string> = {
       }
       loading={eager ? "eager" : "lazy"}
       class:list={[
-        "transition-transform duration-700 ease-out group-hover:scale-[1.025]",
         native ? "h-auto w-full" : "h-full w-full object-cover",
       ]}
     />
@@ -43,12 +43,27 @@ const categoryLabel: Record<string, string> = {
     <h3
       class="text-[0.95rem] tracking-wide transition-colors group-hover:text-brand"
     >
-      {title}
+      <a href={href} class="after:absolute after:inset-0 after:content-['']">
+        {title}
+      </a>
     </h3>
-    <p
-      class="eyebrow shrink-0 whitespace-nowrap"
-    >
-      {categoryLabel[category]}{year && ` · ${year}`}
-    </p>
+    {
+      year && (
+        <p class="shrink-0 whitespace-nowrap text-[0.95rem] text-ink/45">{year}</p>
+      )
+    }
   </div>
-</a>
+  {
+    credit && (
+      <p class="mt-1 text-[0.8rem] text-ink/60">
+        {credit.text}{" "}
+        <a
+          href={credit.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="relative z-10 underline decoration-ink/25 underline-offset-2 transition-colors hover:text-brand hover:decoration-brand"
+        >{credit.firm}</a>
+      </p>
+    )
+  }
+</div>

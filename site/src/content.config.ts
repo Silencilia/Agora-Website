@@ -22,6 +22,14 @@ const projects = defineCollection({
       /** e.g. Built, Competition, Concept, Installation */
       status: z.string().optional(),
       role: z.string().optional(),
+      /** Credit line, e.g. "As design lead for" + linked firm name */
+      credit: z
+        .object({
+          text: z.string(),
+          firm: z.string(),
+          url: z.string().url(),
+        })
+        .optional(),
       collaborators: z.string().optional(),
       awards: z.array(z.string()).default([]),
       /** Index image shown in the gallery and as the page hero */

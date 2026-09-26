@@ -6,6 +6,10 @@ year: "2022 — 2023"
 location: Beijing, China
 status: Built
 role: Design lead, David Chipperfield Architects Shanghai
+credit:
+  text: As designer for
+  firm: David Chipperfield Architects
+  url: https://davidchipperfield.com
 cover: ./main.jpg
 featured: true
 order: 40

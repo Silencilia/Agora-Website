@@ -6,6 +6,10 @@ year: "2023 — 2024"
 location: Shanghai, China
 status: Invited competition
 role: Design lead for riverfront warehouses, industrial heritage route, and landscape integration — David Chipperfield Architects Shanghai
+credit:
+  text: As design lead for
+  firm: David Chipperfield Architects
+  url: https://davidchipperfield.com
 cover: ./main.jpg
 featured: true
 order: 25

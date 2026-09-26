@@ -6,6 +6,10 @@ year: "2019 — 2020"
 location: Chongqing, China
 status: Schematic design through tender documentation
 role: Main contributor to the retail podium and LRT station facade design — Kohn Pedersen Fox Associates
+credit:
+  text: As designer for
+  firm: KPF
+  url: https://www.kpf.com
 cover: ./main.jpg
 order: 55
 ---

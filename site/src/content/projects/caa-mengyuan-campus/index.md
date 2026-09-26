@@ -16,6 +16,6 @@ featured: true
 order: 20
 ---
 
-The proposal for the China Academy of Art's Mengyuan Campus weaves studios, galleries, and pavilions into a landscape of courtyards and gardens, framing art education as a continuum between making, exhibition, and everyday campus life. The project received the Bronze Prize of the International Design Awards and twin Silver Winner honors at the MUSE Design Awards, and was exhibited at the ITSLIQUID Venice International Art Fair.
+The proposal for the China Academy of Art's Mengyuan Campus weaves studios, galleries, and pavilions into a landscape of courtyards and gardens, framing art education as a continuum between making, exhibition, and everyday campus life.
 
 <!-- TODO: expand narrative from competition materials -->

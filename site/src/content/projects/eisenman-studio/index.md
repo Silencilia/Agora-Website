@@ -1,5 +1,5 @@
 ---
-title: Eisenman Studio
+title: Oak Street Connector Redevelopment
 subtitle: Formal analysis and project
 category: academic
 location: New Haven, CT, US

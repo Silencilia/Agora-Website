@@ -7,6 +7,10 @@ location: Shanghai, China
 status: Built
 role: Project architect — curation, installation design, and construction administration, David Chipperfield Architects Shanghai
 collaborators: David Chipperfield Architects London; Rockbund Art Museum
+credit:
+  text: As project leader for
+  firm: David Chipperfield Architects
+  url: https://davidchipperfield.com
 cover: ./main.jpg
 featured: true
 order: 30

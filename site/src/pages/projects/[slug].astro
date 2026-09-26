@@ -37,15 +37,11 @@ const categoryLabel: Record<string, string> = {
   research: "Research",
 };
 
-// Personal projects list collaborators but not a role.
 const facts: [string, string | undefined][] = [
   ["Type", categoryLabel[d.category]],
   ["Status", d.status],
   ["Location", d.location],
   ["Year", d.year],
-  ...(d.category === "personal"
-    ? []
-    : [["Role", d.role] as [string, string | undefined]]),
   ["Collaborators", d.collaborators],
 ];
 ---
@@ -53,12 +49,22 @@ const facts: [string, string | undefined][] = [
 <Base title={d.title} description={d.subtitle}>
   <article>
     <header class="mx-auto max-w-screen-2xl px-6 pt-14 pb-10 md:px-10 md:pt-20">
-      <p class="eyebrow">
-        {categoryLabel[d.category]}{d.year && ` — ${d.year}`}
-      </p>
-      <h1 class="mt-4 max-w-4xl text-3xl font-light tracking-tight text-balance md:text-5xl">
+      <h1 class="max-w-4xl text-3xl font-light tracking-tight text-balance md:text-5xl">
         {d.title}
       </h1>
+      {
+        d.credit && (
+          <p class="mt-5 text-base text-ink/70 md:text-lg">
+            {d.credit.text}{" "}
+            <a
+              href={d.credit.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-ink/25 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand"
+            >{d.credit.firm}</a>
+          </p>
+        )
+      }
     </header>
 
     <div class="mx-auto max-w-screen-2xl px-6 md:px-10">

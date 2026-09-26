@@ -18,4 +18,4 @@ order: 60
 
 The historic identity of Gloucester, a once-renowned New England marine town, is under siege: global capital challenges its deep-rooted sense of place while tourism development erases local fishing traditions. Rather than a forced preservation that would turn the city into a cultural fossil, the plan establishes the Gloucester Maritime Trade Campus as an anchor institution, giving the city the social, economic, and political impetus to reinvigorate its identity on its own terms.
 
-The campus reshapes the shoreline with key nodes that fuse traditional activities — fishing, logistics, boat crafting, ship maintenance — with new curatorial and educational practices, holding the city's contentious forces in productive tension. The project received the H.I. Feldman Prize, Yale School of Architecture's award for the best studio project.
+The campus reshapes the shoreline with key nodes that fuse traditional activities — fishing, logistics, boat crafting, ship maintenance — with new curatorial and educational practices, holding the city's contentious forces in productive tension.

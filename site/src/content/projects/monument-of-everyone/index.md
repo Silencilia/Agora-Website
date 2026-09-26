@@ -11,6 +11,6 @@ cover: ./main.jpg
 order: 110
 ---
 
-An entry to the Non Architecture competition "Dying," the Monument of Everyone asks how commemoration can belong to ordinary lives rather than singular heroes. The proposal received an Honorable Mention and has since been exhibited at the ITSLIQUID Borders and Canvas art fairs in Venice and London.
+An entry to the Non Architecture competition "Dying," the Monument of Everyone asks how commemoration can belong to ordinary lives rather than singular heroes.
 
 <!-- TODO: expand narrative from competition boards -->

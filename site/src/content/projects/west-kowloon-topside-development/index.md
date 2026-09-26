@@ -7,6 +7,10 @@ location: Hong Kong
 status: Invited competition and planning submission
 role: Designer of the client-selected competition scheme and main contributor to the office towers — Kohn Pedersen Fox Associates
 collaborators: JCFO (landscape architect)
+credit:
+  text: As designer for
+  firm: KPF
+  url: https://www.kpf.com
 cover: ./main.jpg
 order: 52
 ---
