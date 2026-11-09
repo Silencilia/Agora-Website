@@ -19,5 +19,6 @@
 *.png      binary
 *.webp     binary
 *.pdf      binary
+*.mp4      binary
 *.ai       binary
 *.psd      binary

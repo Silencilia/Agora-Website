@@ -1,0 +1,40 @@
+---
+/**
+ * UNLISTED PAGE — Faena Reshaped video.
+ *
+ * /storage/ holds files shared by direct link only. Nothing on the site
+ * links here, /storage/ itself has no index page, and search engines are
+ * told not to index it (noindex in Base.astro).
+ *
+ * The random suffix in the file name is what keeps the URL unguessable.
+ * To revoke a shared link, rename this file AND the matching folder under
+ * public/storage/ to a new random suffix.
+ */
+import Base from "../../layouts/Base.astro";
+
+const base = "/storage/faena-reshaped-60hksa3od5or";
+---
+
+<Base title="Faena Reshaped" description="Faena Reshaped" noindex>
+  <article>
+    <header class="mx-auto px-6 pt-14 pb-10 lg:px-40 xl:px-80 md:pt-20">
+      <h1 class="max-w-4xl text-3xl font-light tracking-tight text-balance md:text-5xl">
+        Faena Reshaped
+      </h1>
+    </header>
+
+    <div class="mx-auto px-6 pb-14 lg:px-40 xl:px-80 md:pb-20">
+      <div class="overflow-hidden bg-mist">
+        <video
+          class="block aspect-video w-full"
+          controls
+          playsinline
+          preload="metadata"
+          poster={`${base}/poster.jpg`}
+        >
+          <source src={`${base}/faena-reshaped.mp4`} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </article>
+</Base>
