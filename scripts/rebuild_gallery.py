@@ -17,9 +17,9 @@ DEST = os.path.join(
 JOBS = [
     ('CAA Mengyuan Campus', 'caa-mengyuan-campus'),
     ('West Zhejiang Agro-Tech Industry Park', 'west-zhejiang-agro-tech-industry-park'),
-    ('Minsheng Wharf', 'minsheng-wharf'),
+    ('Minsheng Wharf', 'minsheng-wharf-masterplan'),
     ('West Kowloon Topside Development', 'west-kowloon-topside-development'),
-    ('International Land-Sea Center', 'international-land-sea-center'),
+    ('International Land-Sea Center', 'chongqing-international-land-sea-center'),
     ('Baker Circle', 'baker-circle'),
 ]
 
@@ -33,14 +33,14 @@ INCLUDE = {
 
 # slug -> {source file: layout marker}; see ProjectGallery.astro for the markers.
 MARKERS = {
-    'international-land-sea-center': {'p1.webp': 'row', 'p2.jpg': 'row', 'p3.jpg': 'row', 'p4.jpg': 'set'},
+    'chongqing-international-land-sea-center': {'p1.webp': 'row', 'p2.jpg': 'row', 'p3.jpg': 'row', 'p4.jpg': 'set'},
 }
 
 # slug -> source files whose derivative was fixed by hand; left as is on rebuild.
 #   06.jpg: its three conical axons lie on their side; g05.jpg was re-rendered
 #   upright from the portfolio (Portfolio_20250417.pdf, p. 58) instead.
 KEEP = {
-    'international-land-sea-center': {'06.jpg'},
+    'chongqing-international-land-sea-center': {'06.jpg'},
 }
 
 def numkey(f):

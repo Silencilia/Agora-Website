@@ -38,7 +38,7 @@ GALLERIES: dict[str, tuple[str, list[str]]] = {
             "site plan landscape_final fixed.png",
         ],
     ),
-    "nio-house": (
+    "nio-house-beijing-huaxi-live": (
         "NIO House",
         [
             "DNH第十六期 DCA华熙蔚来中心-3_DCA 2.jpg",
@@ -52,7 +52,7 @@ GALLERIES: dict[str, tuple[str, list[str]]] = {
             "IMG_8133.JPG",
         ],
     ),
-    "miami-studio": (
+    "detournement-of-allure": (
         "Miami Studio",
         [
             "Main Iso_cropped.jpg",
@@ -67,7 +67,7 @@ GALLERIES: dict[str, tuple[str, list[str]]] = {
             "STREETVIEW_cropped.jpg",
         ],
     ),
-    "pita-bloom": (
+    "easy-office": (
         "PITA & BLOOM",
         [
             "4_TONED.jpg",
@@ -150,7 +150,7 @@ GALLERIES: dict[str, tuple[str, list[str]]] = {
             "3.jpg",
         ],
     ),
-    "rama": (
+    "ram-assembles": (
         "RAMA",
         [
             "RAMA_DCA_Preview©️RAWVISION studio-27.jpg",
@@ -200,7 +200,7 @@ GALLERIES: dict[str, tuple[str, list[str]]] = {
             "swirl.jpg",
         ],
     ),
-    "eisenman-studio": (
+    "oak-street-connector-redevelopment": (
         "Eisenman Studio",
         [
             "axon 1.jpg",
